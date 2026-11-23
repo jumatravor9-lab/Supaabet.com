@@ -1,0 +1,31 @@
+document.addEventListener('DOMContentLoaded',()=>{
+  const header=document.querySelector('header');
+  if(!header)return;
+  header.classList.add('site-header');
+  const nav=header.querySelector('.mainnav,.nav');
+  if(!nav)return;
+  const toggle=document.createElement('button');
+  toggle.className='menu-toggle';
+  toggle.type='button';
+  toggle.setAttribute('aria-label','Open navigation');
+  toggle.setAttribute('aria-expanded','false');
+  toggle.innerHTML='☰';
+  const spacer=header.querySelector('.spacer');
+  if(spacer)header.insertBefore(toggle,spacer);else header.appendChild(toggle);
+  toggle.addEventListener('click',()=>{
+    const open=header.classList.toggle('menu-open');
+    toggle.setAttribute('aria-expanded',String(open));
+    toggle.setAttribute('aria-label',open?'Close navigation':'Open navigation');
+    toggle.innerHTML=open?'×':'☰';
+  });
+  nav.addEventListener('click',event=>{
+    if(event.target.closest('a')){
+      header.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-label','Open navigation');
+      toggle.innerHTML='☰';
+    }
+  });
+});
+
+Filter files
